@@ -12,33 +12,29 @@ spec:
       labels:
         app: minecraft-server
     spec:
-      imagePullSecrets:
-        - name: registry-pull-secret
       containers:
       - image: harbor.apps.c6.numerique-interieur.com/mc-minecraft/minecraft-server:e0d08e55
         name: minecraft-server
-        ports:
-        - containerPort: 25565
-          protocol: TCP
         env:
         - name: EULA
-          value: "TRUE"
-        - name: MEMORY
-          value: "1G"
-        - name: TYPE
-          value: "VANILLA"
-        - name: VERSION
-          value: "LATEST"
-        - name: DIFFICULTY
-          value: "easy"
-        - name: MAX_PLAYERS
-          value: "10"
-        - name: OPS
-          value: "your_minecraft_username"
-        resources:
-          limits:
-            cpu: 2
-            memory: 2Gi
-          requests:
-            cpu: 1
-            memory: 1Gi
+          value: "true"
+        ports:
+        - containerPort: 25565
+          name: main
+        readinessProbe:
+          exec:
+            command: [ "/usr/local/bin/mc-monitor", "status", "--host", "localhost" ]
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          failureThreshold: 20
+        livenessProbe:
+          exec:
+            command: ["/usr/local/bin/mc-monitor", "status", "--host", "localhost"]
+          initialDelaySeconds: 120
+          periodSeconds: 60
+        volumeMounts:
+        - name: mc-data
+          mountPath: /data
+      volumes:
+      - name: mc-data
+        emptyDir: {}
