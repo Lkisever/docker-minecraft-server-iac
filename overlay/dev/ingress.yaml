@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: plec-demo3.dev.numerique-interieur.com
+    - host: minecraft.dev.numerique-interieur.com
       http:
         paths:
           - path: /
