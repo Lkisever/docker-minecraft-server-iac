@@ -35,6 +35,8 @@ spec:
           value: "your_minecraft_username"
         resources:
           limits:
+            cpu: 2
             memory: 2Gi
           requests:
+            cpu: 1
             memory: 1Gi
