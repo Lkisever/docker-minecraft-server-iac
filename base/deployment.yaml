@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft-server
+  template:
+    metadata:
+      labels:
+        app: minecraft-server
+    spec:
+      containers:
+      - image: itzg/minecraft-server
+        name: minecraft-server
+        ports:
+        - containerPort: 25565
+          protocol: TCP
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: MEMORY
+          value: "1G"
+        - name: TYPE
+          value: "VANILLA"
+        - name: VERSION
+          value: "LATEST"
+        - name: DIFFICULTY
+          value: "easy"
+        - name: MAX_PLAYERS
+          value: "10"
+        - name: OPS
+          value: "your_minecraft_username"
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 1Gi
