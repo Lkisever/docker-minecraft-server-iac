@@ -12,6 +12,8 @@ spec:
       labels:
         app: minecraft-server
     spec:
+      imagePullSecrets:
+        - name: registry-pull-secret
       containers:
       - image: harbor.apps.c6.numerique-interieur.com/mc-minecraft/minecraft-server:e0d08e55
         name: minecraft-server
