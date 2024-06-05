@@ -18,6 +18,13 @@ spec:
         env:
         - name: EULA
           value: "true"
+        resources:
+          limits:
+            cpu: 2
+            memory: 2Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
         ports:
         - containerPort: 25565
           name: main
