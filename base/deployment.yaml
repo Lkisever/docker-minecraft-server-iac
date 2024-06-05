@@ -13,7 +13,7 @@ spec:
         app: minecraft-server
     spec:
       containers:
-      - image: harbor.apps.c6.numerique-interieur.com/mc-minecraft/minecraft-server@sha256:ff06ae12c08de0751c855c00572b6b866e02334de6717063e0a4a57bd3f5a853
+      - image: harbor.apps.c6.numerique-interieur.com/mc-minecraft/minecraft-server
         name: minecraft-server
         ports:
         - containerPort: 25565
